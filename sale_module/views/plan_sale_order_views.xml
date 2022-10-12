@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="plan_sale_order_form" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.form</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <form string="Plan Sale Order">
+                    <header>
+                        <button name="send_approved_button" string="Gửi duyệt" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state','in',['send_approve','approved'])]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="price_id"/>
+                            <field name="info_business_plan"/>
+                            <field name="approval_id"
+                                   attrs="{'readonly': [('state', '=', 'approved')]}">
+                                <field name="state" force_save="1"/>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="plan_sale_order_tree" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.tree</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="name"/>
+                    <field name="price_id"/>
+                    <field name="info_business_plan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="plan_sale_order_search_view" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.search</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Plan Sale Order Search">
+                    <field name="name"/>
+                    <field name="price_id"/>
+                    <field name="info_business_plan"/>
+                    <field name="state"/>
+                    <filter string="States" name="state" domain="[('state','=','approved')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="States" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="plan_sale_order_action" model="ir.actions.act_window">
+            <field name="name">Plan Sale Order Action</field>
+            <field name="res_model">plan.sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+
+        </record>
+        <menuitem id="sale_order_inherit_menu" parent="sale.sale_menu_root" name="Sale Order Menu"
+                  action="plan_sale_order_action"
+        />
+    </data>
+</odoo>

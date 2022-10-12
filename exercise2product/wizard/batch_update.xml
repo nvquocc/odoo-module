@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_inherit_batch_update" model="ir.ui.view">
+        <field name="name">view.res.partner.batch.update</field>
+        <field name="model">res.partner.batchupdate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch Update">
+                <group>
+                    <group>
+                        <field name="valid_coupon"/>
+                    </group>
+                    <group/>
+                </group>
+                <p>
+                    Apply updating on the selected record(s)?
+                </p>
+                <footer>
+                    <button string="Confirm" name="multi_update" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_partner_batch_update" model="ir.actions.act_window">
+        <field name="name">Batch Update</field>
+        <field name="res_model">res.partner.batchupdate.wizard</field>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="res_partner_inherit_batch_update"/>
+    </record>
+</odoo>

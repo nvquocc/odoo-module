@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sale_group" model="res.groups">
+            <field name="name">Sale Group</field>
+            <field name="comment">This is sale group role</field>
+        </record>
+    </data>
+</odoo>

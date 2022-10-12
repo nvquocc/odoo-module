@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="approved_sale_order_form" model="ir.ui.view">
+            <field name="name">approved.sale.order.view.form</field>
+            <field name="model">approved.sale.order</field>
+            <field name="arch" type="xml">
+                <form string="Approved Sale Order" >
+                    <sheet>a
+                        <group>
+                            <field name="name"/>
+                            <field name="state"/>
+                            <field name="button_invisble" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="approved_sale_order_tree" model="ir.ui.view">
+            <field name="name">approved.sale.order.view.tree</field>
+            <field name="model">approved.sale.order</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="is_user" invisible="1"/>
+                    <field name="button_invisble" invisible="1"
+                           />
+                    <button name="approved_button" string="Phê duyệt" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('is_user','=',False),('state', '!=', 'new'),('state', '!=', 'send_approve')]}"/>
+                    <button name="refuse_button" string="Từ chối" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('is_user','=',False),('state', '!=', 'new'),('state', '!=', 'send_approve')]}"/>
+                    <field name="state"/>
+
+                </tree>
+
+            </field>
+        </record>
+        <record id="approved_sale_order_action" model="ir.actions.act_window">
+            <field name="name">Approved Sale Order Action</field>
+            <field name="res_model">approved.sale.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

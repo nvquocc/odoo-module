@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="form_view_odoo_sale" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="customer_discount_code"/>
+            </xpath>
+            <xpath expr="//field[@name='tax_totals_json']" position="after">
+                <field name="sale_order_discount_estimated"/>
+                <field name="total_after_discount"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tree_view_odoo_sale_order" model="ir.ui.view">
+        <field name="name">sale.order.inherit.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='partner_id']" position="after">
+                <field name="customer_discount_code"/>
+                <field name="sale_order_discount_estimated"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tree_view_odoo_sale_quotations" model="ir.ui.view">
+        <field name="name">sale.order.inherit.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='partner_id']" position="after">
+                <field name="customer_discount_code"/>
+                <field name="sale_order_discount_estimated"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_order_search_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherit.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="customer_discount_code" string="Discount Code"/>
+            </xpath>
+        </field>
+
+    </record>
+
+    <record id="sale_order_view_search_inherit_quotation" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit.quotation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_quotation']" position="after">
+                <field name="customer_discount_code"/>
+                <separator/>
+                <filter string="My Custom Discount Code" name="customer_discount_code"
+                        domain="[('customer_discount_code', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="sale_order_action_inherit" model="ir.actions.act_window">
+        <field name="name">Sale Order Action Inherit</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain" eval="[('has_coupon','=',True)]"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_inherit_sale_order"
+              name="Menu Sale Inherit"
+              parent="sale.menu_sale_config"
+              sequence="10"
+              action="sale_order_action_inherit"/>
+
+</odoo>
