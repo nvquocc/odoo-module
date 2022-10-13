@@ -5,7 +5,7 @@
             <field name="name">approved.sale.order.view.form</field>
             <field name="model">approved.sale.order</field>
             <field name="arch" type="xml">
-                <form string="Approved Sale Order" >
+                <form string="Approved Sale Order">
                     <sheet>a
                         <group>
                             <field name="name"/>
@@ -28,13 +28,13 @@
                     <field name="name"/>
                     <field name="is_user" invisible="1"/>
                     <field name="button_invisble" invisible="1"
-                           />
+                    />
                     <button name="approved_button" string="Phê duyệt" type="object"
                             class="oe_highlight"
-                            attrs="{'invisible': ['|',('is_user','=',False),('state', '!=', 'new'),('state', '!=', 'send_approve')]}"/>
+                            attrs="{'invisible': ['|','|','|',('is_user','=',False),('state', '=', 'new'),('state', '=', 'approved'),('state', '=', 'refused')]}"/>
                     <button name="refuse_button" string="Từ chối" type="object"
                             class="oe_highlight"
-                            attrs="{'invisible': ['|',('is_user','=',False),('state', '!=', 'new'),('state', '!=', 'send_approve')]}"/>
+                            attrs="{'invisible': ['|','|','|',('is_user','=',False),('state', '=', 'new'),('state', '=', 'approved'),('state', '=', 'refused')]}"/>
                     <field name="state"/>
 
                 </tree>

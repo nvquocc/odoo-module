@@ -5,7 +5,7 @@ class ApprovedSaleOrder(models.Model):
     _name = "approved.sale.order"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     plan_sale_order_id = fields.Many2one("plan.sale.order", 'Name ID', tracking=True)
-    name = fields.Many2one("res.partner", string="Tên",required=True)
+    name = fields.Many2one("res.partner", string="Tên", required=True)
     state = fields.Selection(
         [('new', 'Mới'), ('send_approve', 'Gửi duyệt'), ('approved', 'Duyệt'), ('refused', 'Từ chối duyệt')],
         'Trạng thái phê duyệt', default='new', tracking=True, readonly=True)
@@ -30,6 +30,8 @@ class ApprovedSaleOrder(models.Model):
                     body=f"Chấp nhận gửi thông tin cho {self.plan_sale_order_id.create_uid.partner_id.name}  ",
                     message_type="notification",
                     partner_ids=[self.plan_sale_order_id.create_uid.partner_id.id])
+                if rec.name.name == rec.plan_sale_order_id.create_uid.partner_id.name:
+                    rec.is_user = True
 
     def refuse_button(self):
         self.state = 'refused'
