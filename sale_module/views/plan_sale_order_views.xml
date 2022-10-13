@@ -5,7 +5,7 @@
             <field name="name">plan.sale.order.view.form</field>
             <field name="model">plan.sale.order</field>
             <field name="arch" type="xml">
-                <form string="Plan Sale Order">
+                <form string="Plan Sale Order" create="0">
                     <header>
                         <button name="send_approved_button" string="Gửi duyệt" type="object"
                                 class="oe_highlight"

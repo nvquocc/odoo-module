@@ -30,6 +30,7 @@ class PlanSaleOrder(models.Model):
                 check = check + 1
                 self.message_post(body=f"Đã gửi thông tin cho {rec.name.name} phương án kinh doanh",
                                   partner_ids=partner_ids)
+
             rec.state = 'send_approve'
 
     @api.depends("approval_id.state")
