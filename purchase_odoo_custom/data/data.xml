@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_room" model="hr.department">
+            <field name="name">Phong san xuat</field>
+            <field name="limit_money">5000000</field>
+        </record>
+         <record id="it_room" model="hr.department">
+            <field name="name">Phong IT</field>
+            <field name="limit_money">5000000</field>
+        </record>
+    </data>
+</odoo>

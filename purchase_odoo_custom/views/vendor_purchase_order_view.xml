@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="vendor_purchase_order_form" model="ir.ui.view">
+            <field name="name">Vendor Purchase Order Form</field>
+            <field name="model">vendor.purchase.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="quantity"/>
+                        <field name="price"/>
+                        <field name="delivery_lead_time"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="vendor_purchase_order_tree" model="ir.ui.view">
+            <field name="name">Vendor Purchase Order Tree</field>
+            <field name="model">vendor.purchase.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="quantity"/>
+                    <field name="price"/>
+                    <field name="delivery_lead_time"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="vendor_purchase_order_action" model="ir.actions.act_window">
+            <field name="name">Vendor Purchase Order</field>
+            <field name="res_model">vendor.purchase.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
